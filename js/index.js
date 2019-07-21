@@ -21,7 +21,7 @@ $(function(){
 
 if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
    var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
-   var roY = 0 , roX = 0 , tZ = -12000;
+   var roY = 0 , roX = 0 , tZ = -4000;
    var timer1 , timer2;
 }else{
 	var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
