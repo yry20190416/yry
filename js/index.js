@@ -1,3 +1,14 @@
+if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+   var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
+   var roY = 0 , roX = 0 , tZ = -2000;
+   var timer1 , timer2;
+	alert('电脑');
+} else {
+	alert('手机');
+  var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
+  var roY = 0 , roX = 0 , tZ = -500;
+  var timer1 , timer2;
+}
 $(function(){
 	var liNum = 5*5*5; // 暂且认为li个数为 5*5*5 个
 	/* var dT = [
