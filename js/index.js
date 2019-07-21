@@ -407,7 +407,7 @@ $(function(){
 			});
 		});
 		//嵌套页面
-		/* $show.click(function(ev){
+		 $show.click(function(ev){
 			
 			
 			$('#wrap').animate({
@@ -422,7 +422,7 @@ $(function(){
 				left : 0
 			},1000).find('iframe').attr('src' , 'demo/3D drag/index.html');
 			ev.stopPropagation();
-		}); */
+		}); 
 		$('#back').click(function(ev){
 			$('#wrap').animate({
 				'marginLeft' : 0
