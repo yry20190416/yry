@@ -35,7 +35,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
 			clearInterval( timer1 );
-			/* $(this).on('touchmove',function(ev){
+			 $(this).on('touchmove',function(ev){
 			//	ev = ev || window.event; //ev 事件对象 存放事件的相关信息
 				nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
 				nowY = ev.targetTouches[0].pageY;
@@ -48,7 +48,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				});
 				lastX = nowX; // 存放前一点的x坐标
 				lastY = nowY;
-			}); */
+			}); 
 			return false;
 		}); 
 		//监听 touchmove 事件 手指 移动时 做的事情
