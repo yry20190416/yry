@@ -56,7 +56,9 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		});
 		//监听 touchmove 事件 手指 移动时 做的事情
 			document.addEventListener("touchmove", function (e,d) {
-				alert(JSON.stringify(d))
+				if(d == undefined){
+					d = -1;
+				}
 			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
