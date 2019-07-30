@@ -65,6 +65,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 					tZ = tZ - lastX;  // 两者差值
 					alert(tZ)
 				}
+		alert(tZ)
 				$('#main').css({
 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
 				});
