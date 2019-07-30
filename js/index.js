@@ -34,11 +34,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			//ev = ev || window.event;
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
-			if (ev.touches.length >= 2) { //判断是否有两个点在屏幕上
-			     alert('两指')
-			    }else{
-			    	alert('一指')
-			    };
+			
 			clearInterval( timer1 );
 			
 			return false;
