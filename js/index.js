@@ -39,21 +39,7 @@ function getAngle(p1, p2) {
         y = p1.pageY- p2.pageY;
     return Math.atan2(y, x) * 180 / Math.PI;
 };
- var box=document.querySelector("#main");
-    var boxGesture=setGesture(box);  //得到一个对象
-    boxGesture.gesturestart=function(){  //双指开始
-	   
-        box.style.backgroundColor="yellow";
-    };
-    boxGesture.gesturemove=function(e){  //双指移动
-	     alert(e);
-        box.innerHTML = e.scale+"<br />"+e.rotation;
-        box.style.transform="scale("+e.scale+") rotate("+e.rotation+"deg)";//改变目标元素的大小和角度
-    };
-    boxGesture.gestureend=function(){  //双指结束
-        box.innerHTML="";
-        box.style.cssText="background-color:red";
-    };
+ 
 $(function(){
 	var liNum = 5*5*5; // 暂且认为li个数为 5*5*5 个
 	/* var dT = [
@@ -82,7 +68,22 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	var roY = 0 , roX = 0 , tZ = -2000;
 	var timer1 , timer2;
 }		
-		
+	var box=document.querySelector("#main");
+    var boxGesture=setGesture(box);  //得到一个对象
+    boxGesture.gesturestart=function(){  //双指开始
+	   
+        box.style.backgroundColor="yellow";
+    };
+    boxGesture.gesturemove=function(e){  //双指移动
+	     alert(e);
+        box.innerHTML = e.scale+"<br />"+e.rotation;
+	    
+        box.style.transform='translateZ('+ (tZ-e.scale) +'px) rotateX('+ e.scale +'deg) rotateY('+ e.rotation +'deg)';//改变目标元素的大小和角度
+    };
+    boxGesture.gestureend=function(){  //双指结束
+        box.innerHTML="";
+        box.style.cssText="background-color:red";
+    };	
 	 	/*
 		document.addEventListener("touchstart",function(ev){//触碰
 		console.log('触碰')
