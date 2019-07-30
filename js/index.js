@@ -1,5 +1,59 @@
 
-
+function setGesture(el){
+    var obj={}; //定义一个对象
+    var istouch=false;
+    var start=[];
+    el.addEventListener("touchstart",function(e){
+        if(e.touches.length>=2){  //判断是否有两个点在屏幕上
+            istouch=true;
+            start=e.touches;  //得到第一组两个点
+            obj.gesturestart&&obj.gesturestart.call(el); //执行gesturestart方法
+        };
+    },false);
+    document.addEventListener("touchmove",function(e){
+        e.preventDefault();
+        if(e.touches.length>=2&&istouch){
+            var now=e.touches;  //得到第二组两个点
+            var scale=getDistance(now[0],now[1])/getDistance(start[0],start[1]); //得到缩放比例，getDistance是勾股定理的一个方法
+            var rotation=getAngle(now[0],now[1])-getAngle(start[0],start[1]);  //得到旋转角度，getAngle是得到夹角的一个方法
+            e.scale=scale.toFixed(2);
+            e.rotation=rotation.toFixed(2);
+            obj.gesturemove&&obj.gesturemove.call(el,e);  //执行gesturemove方法
+        };
+    },false);
+    document.addEventListener("touchend",function(e){
+        if(istouch){
+            istouch=false;
+            obj.gestureend&&obj.gestureend.call(el);  //执行gestureend方法
+        };
+    },false);
+    return obj;
+};
+function getDistance(p1, p2) {
+    var x = p2.pageX - p1.pageX,
+        y = p2.pageY - p1.pageY;
+    return Math.sqrt((x * x) + (y * y));
+};
+function getAngle(p1, p2) {
+    var x = p1.pageX - p2.pageX,
+        y = p1.pageY- p2.pageY;
+    return Math.atan2(y, x) * 180 / Math.PI;
+};
+ var box=document.querySelector("#main");
+    var boxGesture=setGesture(box);  //得到一个对象
+    boxGesture.gesturestart=function(){  //双指开始
+	   
+        box.style.backgroundColor="yellow";
+    };
+    boxGesture.gesturemove=function(e){  //双指移动
+	     alert(e);
+        box.innerHTML = e.scale+"<br />"+e.rotation;
+        box.style.transform="scale("+e.scale+") rotate("+e.rotation+"deg)";//改变目标元素的大小和角度
+    };
+    boxGesture.gestureend=function(){  //双指结束
+        box.innerHTML="";
+        box.style.cssText="background-color:red";
+    };
 $(function(){
 	var liNum = 5*5*5; // 暂且认为li个数为 5*5*5 个
 	/* var dT = [
@@ -29,13 +83,15 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	var timer1 , timer2;
 }		
 		
-	 	document.addEventListener("touchstart",function(ev){//触碰
+	 	/*
+		document.addEventListener("touchstart",function(ev){//触碰
 		console.log('触碰')
 			//ev = ev || window.event;
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
 			clearInterval( timer1 );
 			 $(this).on('touchmove',function(ev){
+				 alert(tZ);
 			nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
 				nowY = ev.targetTouches[0].pageY;
 				minusX = nowX - lastX;  // 两者差值
@@ -46,7 +102,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 					tZ = tZ - lastX;  // 两者差值
 					
 				}
-		alert(tZ);
+		
 				$('#main').css({
 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
 				});
@@ -91,6 +147,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				});
 			} , 13);
 		});
+		*/
 		$(document).mousedown(function(ev){
 			ev = ev || window.event;
 			lastX = ev.clientX;
