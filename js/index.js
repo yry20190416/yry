@@ -1,4 +1,48 @@
+var pageX, pageY, initX, initY, isTouch = false;
+  var start = [];
+  $("#main").on("touchstart",function(e){
+    // alert("touchstart")
+    //手指按下时的手指所在的X，Y坐标  
+    pageX = e.originalEvent.touches[0].pageX;
+    pageY = e.originalEvent.touches[0].pageY;
+    //初始位置的X，Y 坐标  
+    initX = e.target.offsetLeft;
+    initY = e.target.offsetTop;
+    //记录初始 一组数据 作为缩放使用
+    if (e.originalEvent.touches.length >= 2) { //判断是否有两个点在屏幕上
+      start = e.originalEvent.touches; //得到第一组两个点
+    };
+    //表示手指已按下  
+    // isTouch = true;
+  });
+  $("#main").on("touchmove",function(e){
+    e.preventDefault();
+    // 一根 手指 执行 目标元素移动 操作
+    if (e.originalEvent.touches.length == 1 && isTouch) {};
 
+    // 2 根 手指执行 目标元素放大操作
+    if (e.originalEvent.touches.length >= 2 && isTouch) {
+      // alert("2")
+      //得到第二组两个点
+      var now = e.originalEvent.touches;
+      Math.abs(e.originalEvent.touches[0].pageX-e.originalEvent.touches[1].pageX)
+      //当前距离变小， getDistance 是勾股定理的一个方法
+      if(getDistance(now[0], now[1]) < getDistance(start[0], start[1])){
+
+      };
+    };      
+  })
+
+  $("#main").on("touchend",function(e){
+    //将 isTouch 修改为false  表示 手指已经离开屏幕
+    // if (isTouch) {isTouch = false;}
+  });
+   //缩放 勾股定理方法-求两点之间的距离
+function getDistance(p1, p2) {
+    var x = p2.pageX - p1.pageX,
+    y = p2.pageY - p1.pageY;
+    return Math.sqrt((x * x) + (y * y));
+};
 
  
 $(function(){
@@ -31,69 +75,69 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 }		
 	
 	 	
-		document.addEventListener("touchstart",function(ev){//触碰
-		console.log('触碰')
-			//ev = ev || window.event;
-			lastX = ev.targetTouches[0].pageX;
-			lastY = ev.targetTouches[0].pageY;
-			clearInterval( timer1 );
-			 $(this).on('touchmove',function(ev){
-				 alert(tZ);
-			nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
-				nowY = ev.targetTouches[0].pageY;
-				minusX = nowX - lastX;  // 两者差值
-				minusY = nowY - lastY;
-				roY += minusX*0.2;
-				roX -= minusY*0.2;
-				if(ev.touches.length>=2&&istouch){
-					tZ = tZ - lastX;  // 两者差值
+// 		document.addEventListener("touchstart",function(ev){//触碰
+// 		console.log('触碰')
+// 			//ev = ev || window.event;
+// 			lastX = ev.targetTouches[0].pageX;
+// 			lastY = ev.targetTouches[0].pageY;
+// 			clearInterval( timer1 );
+// 			 $(this).on('touchmove',function(ev){
+// 				 alert(tZ);
+// 			nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
+// 				nowY = ev.targetTouches[0].pageY;
+// 				minusX = nowX - lastX;  // 两者差值
+// 				minusY = nowY - lastY;
+// 				roY += minusX*0.2;
+// 				roX -= minusY*0.2;
+// 				if(ev.touches.length>=2&&istouch){
+// 					tZ = tZ - lastX;  // 两者差值
 					
-				}
+// 				}
 		
-				$('#main').css({
-					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
-				});
-				lastX = nowX; // 存放前一点的x坐标
-				lastY = nowY;
-			}); 
-			return false;
-		}); 
+// 				$('#main').css({
+// 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+// 				});
+// 				lastX = nowX; // 存放前一点的x坐标
+// 				lastY = nowY;
+// 			}); 
+// 			return false;
+// 		}); 
 		
-		//监听 touchmove 事件 手指 移动时 做的事情
-	document.addEventListener("touchmove", function (ev) {
+// 		//监听 touchmove 事件 手指 移动时 做的事情
+// 	document.addEventListener("touchmove", function (ev) {
 		  
-	 		nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
-				nowY = ev.targetTouches[0].pageY;
-				minusX = nowX - lastX;  // 两者差值
-				minusY = nowY - lastY;
-				roY += minusX*0.2;
-				roX -= minusY*0.2;
-				if(ev.touches.length>=2&&istouch){
-					tZ = tZ - lastX;  // 两者差值
+// 	 		nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
+// 				nowY = ev.targetTouches[0].pageY;
+// 				minusX = nowX - lastX;  // 两者差值
+// 				minusY = nowY - lastY;
+// 				roY += minusX*0.2;
+// 				roX -= minusY*0.2;
+// 				if(ev.touches.length>=2&&istouch){
+// 					tZ = tZ - lastX;  // 两者差值
 					
-				}
+// 				}
 		
-				$('#main').css({
-					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
-				});
-				lastX = nowX; // 存放前一点的x坐标
-				lastY = nowY;
-        }, false);
-		document.addEventListener("touchend",function(e){//松开
-		console.log('松开')
-			$(this).off('touchmove');
-			timer1 = setInterval(function(){
-				minusX *= 0.95;
-				minusY *= 0.95;
-				if ( Math.abs(minusX) < 0.5 && Math.abs(minusY) < 0.5 )
-				clearInterval( timer1 );
-				roY += minusX*0.2;
-				roX -= minusY*0.2;
-				$('#main').css({
-					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
-				});
-			} , 13);
-		});
+// 				$('#main').css({
+// 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+// 				});
+// 				lastX = nowX; // 存放前一点的x坐标
+// 				lastY = nowY;
+//         }, false);
+// 		document.addEventListener("touchend",function(e){//松开
+// 		console.log('松开')
+// 			$(this).off('touchmove');
+// 			timer1 = setInterval(function(){
+// 				minusX *= 0.95;
+// 				minusY *= 0.95;
+// 				if ( Math.abs(minusX) < 0.5 && Math.abs(minusY) < 0.5 )
+// 				clearInterval( timer1 );
+// 				roY += minusX*0.2;
+// 				roX -= minusY*0.2;
+// 				$('#main').css({
+// 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+// 				});
+// 			} , 13);
+// 		});
 		
 		$(document).mousedown(function(ev){
 			ev = ev || window.event;
