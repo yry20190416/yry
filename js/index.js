@@ -38,20 +38,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			
 			return false;
 		}); 
-		//监听 touchmove 事件 手指 移动时 做的事情
-	document.addEventListener("touchmove", function (ev) {
-	 		nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
-				nowY = ev.targetTouches[0].pageY;
-				minusX = nowX - lastX;  // 两者差值
-				minusY = nowY - lastY;
-				roY += minusX*0.2;
-				roX -= minusY*0.2;
-				$('#main').css({
-					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
-				});
-				lastX = nowX; // 存放前一点的x坐标
-				lastY = nowY;
-        }, false);
+		
 		document.addEventListener("touchend",function(e){//松开
 		console.log('松开')
 			$(this).off('touchmove');
@@ -67,6 +54,33 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				});
 			} , 13);
 		});
+		//监听 touchmove 事件 手指 移动时 做的事情
+			document.addEventListener("touchmove", function (e,d) {
+				alert(JSON.stringify(d))
+			 		clearInterval( timer2 );
+					tZ += d*80;
+					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
+					tZ = Math.max(-8000,tZ); // Math.max()  …… 最大
+					// -8000 < tZ < 0
+					$('#main').css({
+						'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+					});
+		
+					timer2 = setInterval(function(){
+						d *= 0.85;
+						if ( Math.abs(d) < 0.01 )
+						{
+							clearInterval( timer2 );
+						}
+						tZ += d*80;
+						tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
+						tZ = Math.max(-8000,tZ); // Math.max()  …… 最大
+						// -8000 < tZ < 0
+						$('#main').css({
+							'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+						});
+					} , 13);
+		        }, false);
 		$(document).mousedown(function(ev){
 			ev = ev || window.event;
 			lastX = ev.clientX;
