@@ -34,21 +34,13 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			//ev = ev || window.event;
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
+			if (e.originalEvent.touches.length >= 2) { //判断是否有两个点在屏幕上
+			     alert('两指')
+			    }else{
+			    	alert('一指')
+			    };
 			clearInterval( timer1 );
-			 $(this).on('touchmove',function(ev){
-			//	ev = ev || window.event; //ev 事件对象 存放事件的相关信息
-				nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
-				nowY = ev.targetTouches[0].pageY;
-				minusX = nowX - lastX;  // 两者差值
-				minusY = nowY - lastY;
-				roY += minusX*0.2;
-				roX -= minusY*0.2;
-				$('#main').css({
-					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
-				});
-				lastX = nowX; // 存放前一点的x坐标
-				lastY = nowY;
-			}); 
+			
 			return false;
 		}); 
 		//监听 touchmove 事件 手指 移动时 做的事情
