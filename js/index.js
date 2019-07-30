@@ -75,7 +75,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
         box.style.backgroundColor="yellow";
     };
     boxGesture.gesturemove=function(e){  //双指移动
-	     alert(e);
+	     console.log(e)
         box.innerHTML = e.scale+"<br />"+e.rotation;
 	    
         box.style.transform='translateZ('+ (tZ-e.scale) +'px) rotateX('+ e.scale +'deg) rotateY('+ e.rotation +'deg)';//改变目标元素的大小和角度
