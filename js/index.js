@@ -84,6 +84,18 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 						});
 					} , 13);
 				
+				}else{
+					nowX = e.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
+				nowY = e.targetTouches[0].pageY;
+				minusX = nowX - lastX;  // 两者差值
+				minusY = nowY - lastY;
+				roY += minusX*0.2;
+				roX -= minusY*0.2;
+				$('#main').css({
+					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+				});
+				lastX = nowX; // 存放前一点的x坐标
+				lastY = nowY;
 				}
 				
 		        }, false);
