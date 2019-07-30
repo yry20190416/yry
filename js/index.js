@@ -34,7 +34,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			//ev = ev || window.event;
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
-			alert(JSON.stringify(ev.touches))
+			
 			clearInterval( timer1 );
 			
 			return false;
