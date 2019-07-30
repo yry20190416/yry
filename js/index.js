@@ -56,7 +56,8 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		});
 		//监听 touchmove 事件 手指 移动时 做的事情
 			document.addEventListener("touchmove", function (e,d) {
-				if(d == undefined){
+				if(e.touches.length>=2){
+					if(d == undefined){
 					d = -1;
 				}
 			 		clearInterval( timer2 );
@@ -82,6 +83,9 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 							'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
 						});
 					} , 13);
+				
+				}
+				
 		        }, false);
 		$(document).mousedown(function(ev){
 			ev = ev || window.event;
