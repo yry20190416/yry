@@ -35,32 +35,29 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 			lastX = ev.targetTouches[0].pageX;
 			lastY = ev.targetTouches[0].pageY;
 			clearInterval( timer1 );
-			
-			return false;
-		}); 
-		
-		document.addEventListener("touchend",function(e){//松开
-		console.log('松开')
-			$(this).off('touchmove');
-			timer1 = setInterval(function(){
-				minusX *= 0.95;
-				minusY *= 0.95;
-				if ( Math.abs(minusX) < 0.5 && Math.abs(minusY) < 0.5 )
-				clearInterval( timer1 );
+			 $(this).on('touchmove',function(ev){
+			//	ev = ev || window.event; //ev 事件对象 存放事件的相关信息
+				nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
+				nowY = ev.targetTouches[0].pageY;
+				minusX = nowX - lastX;  // 两者差值
+				minusY = nowY - lastY;
 				roY += minusX*0.2;
 				roX -= minusY*0.2;
 				$('#main').css({
 					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
 				});
-			} , 13);
-		});
+				lastX = nowX; // 存放前一点的x坐标
+				lastY = nowY;
+			}); 
+			return false;
+		}); 
 		//监听 touchmove 事件 手指 移动时 做的事情
-			document.addEventListener("touchmove", function (e,d) {
-				if(e.touches.length>=2){
+	document.addEventListener("touchmove", function (ev,d) {
+	 		if(ev.touches.length>=2){
 					if(d == undefined){
 					d = -1;
 				}
-			 		clearInterval( timer2 );
+			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
 					tZ = Math.max(-8000,tZ); // Math.max()  …… 最大
@@ -85,8 +82,8 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 					} , 13);
 				
 				}else{
-					nowX = e.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
-				nowY = e.targetTouches[0].pageY;
+					nowX = ev.targetTouches[0].pageX;  // ev.clientX  clientX属性存放鼠标x坐标
+				nowY = ev.targetTouches[0].pageY;
 				minusX = nowX - lastX;  // 两者差值
 				minusY = nowY - lastY;
 				roY += minusX*0.2;
@@ -97,8 +94,22 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				lastX = nowX; // 存放前一点的x坐标
 				lastY = nowY;
 				}
-				
-		        }, false);
+        }, false);
+		document.addEventListener("touchend",function(e){//松开
+		console.log('松开')
+			$(this).off('touchmove');
+			timer1 = setInterval(function(){
+				minusX *= 0.95;
+				minusY *= 0.95;
+				if ( Math.abs(minusX) < 0.5 && Math.abs(minusY) < 0.5 )
+				clearInterval( timer1 );
+				roY += minusX*0.2;
+				roX -= minusY*0.2;
+				$('#main').css({
+					'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
+				});
+			} , 13);
+		});
 		$(document).mousedown(function(ev){
 			ev = ev || window.event;
 			lastX = ev.clientX;
