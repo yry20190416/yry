@@ -59,8 +59,10 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	document.addEventListener("touchmove", function (ev,d) {
 	 		if(ev.touches.length>=2){
 				 var now=e.touches;  //得到第二组两个点
-            var scale=getDistance(now[0],now[1])/getDistance(start[0],start[1]); //得到缩放比例，getDistance是勾股定理的一个方法
-				alert(scale)
+				alert(now)
+				alert(now[0])
+           // var scale=getDistance(now[0],now[1])/getDistance(start[0],start[1]); //得到缩放比例，getDistance是勾股定理的一个方法
+				
 				if(d == undefined){
 					d = -1;
 				}
