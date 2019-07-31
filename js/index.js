@@ -56,19 +56,20 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	 		if(ev.touches.length>=2){
 				if(testA == undefined){
 					testA = ev.targetTouches[0].pageX;
-					document.getElementById('test').innerHTML = '<b>'+d+'</b>';
+					
 				}else{
 					if(ev.targetTouches[0].pageX > testA){
 						d = 1;
 					}else{
 						d = -1;
 					}
-					document.getElementById('test1').innerHTML = '<b>'+d+'</b>';
+					
 				}
 			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
 					tZ = Math.max(-8000,tZ); // Math.max()  …… 最大
+				document.getElementById('test').innerHTML = '<b>'+tZ+'</b>';
 					// -8000 < tZ < 0
 					$('#main').css({
 						'transform' : 'translateZ('+ tZ +'px) rotateX('+ roX +'deg) rotateY('+ roY +'deg)'
