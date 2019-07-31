@@ -55,10 +55,10 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	document.addEventListener("touchmove", function (ev,d) {
 	 		if(ev.touches.length>=2){
 				if(testA == undefined){
-					testA = ev.targetTouches[0].pageX;
+					testA = ev.targetTouches[0].pageY;
 					d = -1;
 				}else{
-					if(ev.targetTouches[0].pageX > testA){
+					if(ev.targetTouches[0].pageY > testA){
 						d = 1;
 					}else{
 						d = -1;
