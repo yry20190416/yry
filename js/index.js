@@ -54,11 +54,14 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		//监听 touchmove 事件 手指 移动时 做的事情
 	document.addEventListener("touchmove", function (ev,d) {
 	 		if(ev.touches.length>=2){
+				var x = ev.targetTouches[1].pageX -ev.targetTouches[0].pageX;
+				var y = ev.targetTouches[1].pageY -ev.targetTouches[0].pageY;
+				var a = Math.sqrt((x * x) + (y * y));
 				if(testA == undefined){
-					testA = ev.targetTouches[0].pageY;
+					testA = a;
 					d = -1;
 				}else{
-					if(ev.targetTouches[0].pageY > testA){
+					if(a > testA){
 						d = 1;
 					}else{
 						d = -1;
