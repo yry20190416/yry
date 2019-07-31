@@ -59,7 +59,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				}
 				var x = ev.targetTouches[1].pageX -ev.targetTouches[0].pageX;
 				var y = ev.targetTouches[1].pageY -ev.targetTouches[0].pageY;
-				d = y;
+				d = -(y*x);
 				document.getElementById('test').innerHTML = '<b>'+d+'</b>';
 			 		clearInterval( timer2 );
 					tZ += d*80;
