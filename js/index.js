@@ -1,8 +1,3 @@
-function getDistance(p1, p2) {
-    var x = p2.pageX - p1.pageX,
-        y = p2.pageY - p1.pageY;
-    return Math.sqrt((x * x) + (y * y));
-};
 
 $(function(){
 	var liNum = 5*5*5; // 暂且认为li个数为 5*5*5 个
@@ -58,16 +53,13 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		//监听 touchmove 事件 手指 移动时 做的事情
 	document.addEventListener("touchmove", function (ev,d) {
 	 		if(ev.touches.length>=2){
-				 var now=ev.touches;  //得到第二组两个点
-				alert(JSON.stringify(now));
-				alert(JSON.stringify(now[0]));
-            var scale=getDistance(now[0],now[1])/getDistance(start[0],start[1]); //得到缩放比例，getDistance是勾股定理的一个方法
-			
-				alert(JSON.stringify(scale));
+				
 				if(d == undefined){
 					d = -1;
 				}
-				
+				var x = ev.targetTouches[1].pageX -ev.targetTouches[0].pageX;
+				var y = ev.targetTouches[1].pageY -ev.targetTouches[0].pageY;
+				d = Math.sqrt((x * x) + (y * y));
 			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
