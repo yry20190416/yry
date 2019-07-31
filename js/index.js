@@ -56,7 +56,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 	 		if(ev.touches.length>=2){
 				if(testA == undefined){
 					testA = ev.targetTouches[0].pageX;
-					
+					d = -1;
 				}else{
 					if(ev.targetTouches[0].pageX > testA){
 						d = 1;
