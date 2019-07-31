@@ -22,6 +22,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
    var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
    var roY = 0 , roX = 0 , tZ = -4000;
    var timer1 , timer2;
+	var testA;
 }else{
 	var nowX , lastX , minusX = 0, nowY , lastY , minusY = 0;
 	var roY = 0 , roX = 0 , tZ = -2000;
@@ -53,14 +54,17 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		//监听 touchmove 事件 手指 移动时 做的事情
 	document.addEventListener("touchmove", function (ev,d) {
 	 		if(ev.touches.length>=2){
-				
-				if(d == undefined){
-					d = -1;
+				if(testA == undefined){
+					testA = ev.targetTouches[0].pageX;
+					document.getElementById('test').innerHTML = '<b>'+d+'</b>';
+				}else{
+					if(ev.targetTouches[0].pageX > testA){
+						d = 1;
+					}else{
+						d = -1;
+					}
+					document.getElementById('test1').innerHTML = '<b>'+d+'</b>';
 				}
-				var x = ev.targetTouches[1].pageX -ev.targetTouches[0].pageX;
-				var y = ev.targetTouches[1].pageY -ev.targetTouches[0].pageY;
-				d = - Math.sqrt((x * x) + (y * y));
-				document.getElementById('test').innerHTML = '<b>'+d+'</b>';
 			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
