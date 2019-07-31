@@ -59,7 +59,8 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 				}
 				var x = ev.targetTouches[1].pageX -ev.targetTouches[0].pageX;
 				var y = ev.targetTouches[1].pageY -ev.targetTouches[0].pageY;
-				d = Math.sqrt((x * x) + (y * y));
+				d = Math.sqrt(x+y);
+				document.getElementById('test').innerHTML = '<b>'+d+'</b>';
 			 		clearInterval( timer2 );
 					tZ += d*80;
 					tZ = Math.min(0,tZ); // Math.min()  取参数里面最小的
