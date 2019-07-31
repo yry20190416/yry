@@ -485,7 +485,7 @@ if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
 		var $mainLi = $('#main li');
 		var $show = $('#show');
 		$mainLi.click(function(ev){//点击图片事件
-			var dd = "<img src=\""+ev.target.currentSrc.split('3D/')[1].replace('%20','')+"\"/>";
+			var dd = "<img src=\""+ev.target.currentSrc.split('yry/')[1].replace('%20','')+"\"/>";
 			console.log(dd)
 			console.log(dd.split('.jpg')[0].split('img/')[1])
 			
